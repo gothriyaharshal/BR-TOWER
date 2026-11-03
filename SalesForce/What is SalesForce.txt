@@ -1,0 +1,796 @@
+What is SalesForce ?
+	->Salesforce is the worlds most popular crm system
+	->Many companies and customers rely on this dynamic , web based , low cost crm  platform
+	->it was founded in march 1999 by marc Benioff
+	->Salesforce unites businesses marketing , sales , commerce ,service and it teams
+	  form anywhere with customer 360 one integrated crm platform that powers entire suite of connected apps
+ 
+what is CRM ?
+ 	->Customer Relationship Management
+	->Brodly defined , CRM is a stratergy for managing a company interactions with
+	  clients and sales prospects and ensuring the connect sustains throughout the 
+	  relation
+
+Benifits of CRM
+	->Helps businesses manage there customer interactions and sales processes 
+	->Known for customer centric approach
+	->Provides tools for managing customer data , tracking sales , automating marketing, customer service tasks and analyzing business performance
+	->Cloud based so can be accessed from anywhere with an internet connection
+	->It is highly customizable and can be integrated with other system and applications
+	-> provides industry specific solutions to help various sectors like educations,
+	   healthcare , commiunication , nonprofit , financial services etc.,
+	 
+(
+	first of all we understood Some basic terminology of SalesForce , in database we generally have an table and Attributes(column) and row but in SalesForce we say
+ 	them with unique name like
+
+Table - > Object
+Row -> Record
+Attribute name  -> Field name
+value - > Data Value
+
+)
+
+Introduction to Obejcts >
+
+	>An Object is very similar to a database table in the force.com platform 
+	>The PlatForm comes with a number of standard objects like Account , Contact ,
+	 Case , Lead , Opportunity etc
+	>The Standard objects supports defaults apps like salesforce sales and  salesforce Service
+	> WE can create Custom Object in salesforce as per requirement of the project
+(
+	Some preDefined Objects were provided by SalesForce Know as Standard Object and created by user known as Custom Objects
+
+	< Standard >       Vs        < Custom Object name >
+	Account                       Student     (Object name)
+	Accounts                     Students     (Tab name)
+	Account                      Student_c   (Api _ name)  for uniqueness
+
+We Are Creating Tab because we want to show our tabs on Ui (and want to delete , edit , create record)
+ 
+We Were Creating Custom Objects and Tabs In this formate >>
+ 
+
+Introduction to Tabs >
+	
+	>Through tabs we can navigate around an app
+	>Every tab serves as the starting point for viewing , editing and entering information for a specific object
+	>When we click a tab , the corresponding home page that object appears 
+	>For Example , If we click the Account tab , the Account tab home page appears . it gives you access to all of the account records we can view details of a particular record by clicking on it
+
+This is our whole data we want to set in our database
+
+Student
+	Reg No
+	Name
+	Father Name
+	Mother Name
+	Phone
+	Email
+	Address
+	Entrance Score
+	Stream(Picklist)
+	SalesForce Role(Picklist)
+	SalesForce Skill Set(Multi - Picklist)
+	PassOut?
+	Career Objective
+	Brief Bio(Text Area Rich)
+	Resume(Text Area Rich)
+	LookupMasterDetail to class
+
+Instructor
+	instructor ID
+	Name
+	Cloud Expertise
+	Role Expertise
+	Salary
+	Bonus
+	Year of Experience
+	SalesForce Skill Set
+	Lookup to Clause
+
+Class
+	Name
+	Course Duration
+	Fees
+	Total Students(Rollup)
+	Highest Entrance Score
+	Lowest Entrance Score
+	Average Entrance Score
+
+StdCis
+	Lookup to class
+	lookup to Student
+
+
+So We first Creating our custom Obejct >
+
+
+Steps :->
+	1 > Click on SetUp
+	2> Click on Object Manager (in classic click on objects) then click create object or new
+
+	3> Fill lable(object name)  then plural lable(tab name)  and object name were autofilled 
+
+	4> Starts with vowel sound {means if vowel then click it because if any error message pop up then grammatically it is correct  }
+
+	5> Context Sensitive Help Setting  {if any help want from this object then user go to which link slaesforce.com link or VisualForce Page Link which i created}
+
+	6> Enter Record Name Lable and Formate
+		in it we provide an one Field name it is standard its data type we select 
+ 		like Auto-number or text ,,but there is warning like if we select 
+		autonumber then , if multiple data were uploaded on record by api so 			
+		locking were there and process become slow becuse internally salesforce 		
+		think like which number next i took then which but in text this locking not there
+
+	7> Allow Reports --→ 
+		Agar aap isko check (enable) karte hain, toh aap is custom object ke data 		
+		par reports aur dashboards bana sakenge. (Iske bina aap object ka data 			
+		report mein nahi dekh paayenge).
+
+	8>Allow Activities: 
+		Isko enable karne se aap is custom object ke records ke sath Tasks aur 			
+		Events (jaise calls, emails, meetings) jod paayenge. mtlb mera koi record  		
+			Ex> meine abhi object banya toh isme bina soche smje isse check 			
+			krdia ab m mera record suppose meine bna lia ab us record pr click 			
+			krke open activities m jauga toh us particular record k lie khuch 			
+			task ya event perfrom kr va skta hu 
+			> or open acitivity suppose meine nhi lgai toh badme page layout pr 			
+			jake bhi lga skta hu 
+
+	9>Track Field History:
+		 Agar koi user is object ke kisi bhi field (data) ko change karta hai, toh 		
+		Salesforce uska history record rakhega ki kisne, kab, aur kya purana/naya data dala tha.
+
+	10>Allow in Chatter Groups: 
+		Isse aap is object ke records ko Salesforce ke internal social tool 			
+		(Chatter) par share kar paayenge aur discussions kar sakenge.
+
+	11>Enable Licensing: 
+		Agar aapka object kisi managed package ka part hai jo Salesforce 			
+		AppExchange par bikta hai, toh yeh feature license management ke liye use hota hai.
+
+	12>Enterprise Application Object: 
+		Jab aap "Allow Sharing", "Allow Bulk API Access", aur "Allow Streaming API 		
+		Access" jese advanced features ko enable karte hain, toh object enterprise-		
+		grade ban jata hai (yani bade level par data sharing aur high-performance API calls ke liye tayar).
+
+		Light Application Object: Agar yeh advanced sharing aur API settings 				
+		disable hoti hain, toh yeh halka-fulka (lightweight) object maana 			
+		jata hai jo chote use-cases ke liye hota hai.
+
+		Sharing & APIs:
+			Allow Sharing: Isse object par Sharing Rules, Role Hierarchy, aur 			
+			manual sharing kaam karti hai (ki kaun kiska record dekh sakta hai).
+
+		Allow Bulk API Access: 
+			Isse aap ek sath laakhon records ko Bulk API ke zariye 					
+			insert/update kar sakte hain (data migration ke liye zaroori).
+
+		Allow Streaming API Access: 
+			Isse real-time data updates push notifications ke through stream 			
+			kiye ja sakte hain.
+
+	13>In Development: 
+			Iska matlab hai ki object abhi ban raha hai aur sirf System 				
+			Administrators ya builders ko hi dikhega. Aam users (Standard Users) isko nahi dekh sakte.
+
+	14>Deployed: 
+			Iska matlab hai object fully ready hai, aur जिन users ko permissions hain, wo isko use kar sakte hain.
+			by default deployed set hota h kyuki agr devlopment hoga toh system administration k alawa kisi user ko vo object nhi show hoga ,,,
+
+	15>Allow Search:
+			 Agar aap is checkbox ko tick karte hain, toh jab koi user Salesforce ke top global search bar mein kuch type karega, toh is 
+			object ke records bhi search result mein show honge. Agar yeh off raha, toh global search mein is object ka data nahi aayega.
+
+
+   { we provide field name like  studentId and autoNumber s- {0000} }
+
+  	16>
+		and if we Click on [] launch new custom tab  then there tab were 
+		generated  , and if we are not select it then m letter bhi add kr skta hu
+ 		tab select krke quick box m , vaha muje next krne pr ye option dikhea 			
+		splash page custom link ki koi user us tab ko click kre phli baar toh m jo 		
+		link provide krau vo dike like koi dashboard ki ya koi report ki etc.
+ 		go on tab option and select object option like Student and make its tab visible
+
+	17>
+		Add Notes and Attachments related list to default page layout
+		  	agr muje koi notes ya attachment attach krna ho object k sath
+
+	18> apply one tab visibility to all  [] means for all we set default on or off 
+		(on ka mtlb sari profile wale user is tab ko dekh skte h off mtlb search krna pdega or tab hidden mtlb na search krne pr milega na dikega)
+     		apply a diffrenet tab visibility [] diffrenet rkhna h like konse user ka off hoga konsa on
+		ab ye tab kis kis ko visible hoga vo chize
+
+	5> next Option we select in which application this tab visible , , we select first like sales or if we create app then we select that app like recruting
+		
+	
+Standard fields >
+	 which created when we create custom object
+ 	createdBy , lastModifiedBy , Owener , Name(att the time we create object there has option)
+	
+	yhaa ye createdBy , LastModifiedBy and Owner apni system feild h kyuki inhe system hi bnata h or manage krta h or Name mera standard field h 
+
+PickList Fields >
+	picklist islie use aata h taki multiple m se koi ek select kr sku
+ 
+Values (Option 1)	
+	Use global picklist value set (agr meine koi phle se picklist bna rkha h toh vo wala hi formate select ho jaye waps na likhna pde)
+	,or agr meine global wala select kr lia toh m khud se extra value add nhi kr skta vhi kr skta hu jo global m h agr krni h toh global m jake hi kro
+
+	picklist ki value generally m delete nhi krta deactivate hi krta hu....deactivate krne se kya hoga ki mere purane record m toh vo value dikhegi pr nye record bnauga
+	pr agr meine delete kia toh "A ghost value" yaani ki ek aisi value reh jati hai jo background mein toh hai par ab system mein exist nahi karti.
+	unme vo show nhi hogi 
+	Reports & List Views: Jab tu aisi field par koi Report ya List View banayega jismein deleted value waale purane records hain,
+	toh wahan data inconsistent dikh sakta hai ya error aa sakti hai.
+
+	Enter values, with each value separated by a new line (ya fir m manully likhuga ki ye ye data h )
+
+
+option2 >
+	Display values alphabetically, not in the order entered [alphabatically select krni h tb]
+ 	Use first value as default value  [first value ko default man na h tb]
+ 	Restrict picklist to the values defined in the value set      [iska mtlb jo pichlist m value h user unhi m se dalega agr select nhi kia toh alg koi value bhi dal skta h user] 
+option 3>
+	Add this field to existing custom report types that contain this entity 
+	[isme agr muje is field ko report m add krna h tb]
+
+ab filed bn gyi meri tb next kruga toh field level security aayegi usme visible pr tick kia toh us profile k log read bhi kr payege is field ko or edit bhi or khali read only kia toh read kr payage
+ 
+ 
+Fields Creation 
+	if i want to create new Fileds in my object Student then i go on object manager then search
+	fileds and relationship , new , datatype select provide description, field name selecting add this field
+	to existing custom reports types that contains this entity we have to provide default value, then profile comes like for whome this field is visible , adding page layout 
+
+	default value m formula se bhi set kr skta hu formula se hi set krta hu m
+
+{{{{
+
+1. "Allow Search" KAUN-KAUN SI fields par on ho sakta hai? (Supported Fields)
+Yeh option sirf Text-based fields par hi kaam karta hai jahan log kuch likhte hain. Jaise:
+
+Text fields (jaise Job Title, City, Name)
+
+Text Area aur Long Text Area fields (jaise Description, Comments)
+
+Email aur Phone fields
+
+Auto Number fields
+
+2. "Allow Search" KIS PAR NAHI ho sakta? (Not Supported)
+Salesforce har tarah ki field ko search allow nahi karta. Yeh in fields par nahi hota:
+
+Checkbox fields (True/False wali)
+
+Number, Currency, aur Percent fields (jaise Salary, Age, Discount) — Number fields global search mein direct text ki tarah search nahi hotiin.
+
+Date aur Date/Time fields
+
+Picklist (Dropdown) aur Multi-Select Picklist fields
+
+Formula fields aur Roll-Up Summary fields
+
+Lookup / Master-Detail fields (dusre object ke sath relation wali fields)
+
+}}}}}} 
+
+->Limits of data type fields 
+     	Text   		Letters, numbers, ya symbols.		Max 255 characters.
+        Text Area	Multi-line text (Simple description).	Max 255 characters (separate lines mein).
+   Long Text Area	Badi text / notes ke liye		Max 131,072 charact
+   Rich Text Area	Formatting(Bold,Italic,images,link k sath)	131072
+Encrypted Text Area	(Password, PIN).	  		Max 175 characters.
+	Number 		decimal or norma			18
+Currency							18
+percentage							18
+Date								Standard Calendar Date
+Date/Time							Date+Time Value
+phone								40
+email								80
+url								255
+picklist							max 255 character (1000 (active))
+MultiSelect							500
+Auto number							9
+geo location					                30 charcter
+ek org m kitne global value set					500 
+tab								100 (custom)
+
+App >
+	if i want to create an app then go to App Manager ,then new Lightning app ,give app name (image)
+ 
+	standard navigation(Bs ek baar m ek tab khulega) and custom navigation (Multiple page ek sath khol skte h )
+
+	->Navigation iteam select (jo meine bnaye  h custom object  vo m add kr skta hu custom)
+
+Limits
+	OBJECTS
+   		custom object + your custom settings =====> 400
+    		custom obejct  + total custom settings -> 3000 (isme object appexchange se download kie app k bhi ho skte h ot setting extra bhi) 
+    		custom fields (per object) -> 500
+    		validation rules(per object) -> 100
+    		roll-up summary fields - > 25 per object
+		org kitini bhi bn skti h 
+		app 10 bna skte h
+		Tab ---> 1000 (custom object hi 400 bna skta hu toh tab itni kyu kyuki tab or bhi type ki hoti h like ) 
+			webtab(iski mdad se m url ya website ko tab ki madad se dikha skta hu )
+			Visualforce Tabs (Agar aapne koi Visualforce page banaya hai, toh uske liye alag tab ban sakti hai.)
+			Lightning Component / Page Tabs: Agar aapne koi Lightning Web Component (LWC) ya Lightning Page banayi hai, toh uske liye bhi direct tab ban sakti hai.
+
+		picklist > total 1000 rkh skte h (mix up  of active and deactive)
+		multi select picklist > total 1000 rkh skte h (mix up  of active and deactive)
+		field dependency k controlling m (picklist →300 value hi max  h ) or dependent m 500
+
+Storage Limit
+    		Data Storage(Total org) -> 5 MB se 5 GB tak (Plan ke mutabiq kafi kam hoti hai)
+    		File Storage (Total Org)	20 MB se 20 GB tak
+API LIMITS
+		Daily API Requests	5,000 requests per 24 hours
+		Concurrent API Requests	25
+Automation & Code
+		Active Flows / Triggers	Full Support (Apex, Triggers, Flows, LWC)
+Users and License
+		Usually 2 to 5 licences (Free milte hain)
+Sandboxes
+	Sandboxes(Nahi milte (Kyunki khud Developer Edition hi ek alag free environment hota hai))
+
+
+Chapter Second >>>>
+		Hum kya kr rhe h ki Youtube ka lecture chl rha h uske sath sath extra chiz jo m bna rha hu usme add krta ja rha hu pdhne se mtlb h 
+		Ab youtube ki is video m jo humne Student object bnaya tha uski sari fields bnadi total jo ScrreenShot m bhi thi upr wale m or usme apn record insert kr skte h 
+		, or instructor wale m id or weekDays add krdena
+		
+		>Ek chiz ki meine Record insert kia toh mera record dikhega or m All pr click krke fir 
+			Select Field bhi kr skta hu jis se muje jo muje fields dekhni h vo bhi dikh jaye pr iski limit 10 hi hoti h ye m classic m keise kruga System layout pr jake
+			position tab pr jake
+
+		>> agr muje kisi field ka datatype change krna h toh m 
+			Text se Long Text Area / Rich Text Area: (agr isme ulta krnah toh kr skte h pr 255 hi hone chahiye like text m krna h toh )
+			Number, Currency, aur Percent aapas mein
+			Date se Date/Time (kuch conditions ke sath):
+
+			inka nhi ho skta >>
+				Number / Currency se Text (ya ulta):
+				Checkbox, Date, ya Picklist , multiselect se doosra type
+
+		>> Obejct delete hone pr 15 din recyle bin m rhta h , record bhi or field bhi 
+			pr tab delete krne se obejct ya field pr koi asr nhi pdta or tab permanent delete hoti h 
+
+Field Dependency >>>
+		Suppose koi field h country usme (india , usa etc ..,) vo meri controlling field h ........or dusri field pr click kia toh usme srif india ki hi country dikhayge
+		agr india select kia toh usa kia toh unki country dikhayege vo hoti  h dependent field ....is se kaam aasan ho jata h 
+		Controlling feild m (Standard ya custom checkbox ya pichlist ho skti h (300 value hi aayegi isme))
+		Dependent m (picklist ya multiSelect jisme 500)
+
+		iska pura creation dekhte h m custom Relationship or field m jauga vha muje field dependency dikhega vah m controlling or dependendt field enter kruga fir bs 
+		aage muje controlling wale m kon kon si dikha ni h vo select kr skta  hu m easyky then save or check kro 
+		
+                 (Enroll full time (Controlling fields)  or WeekDays(dependent) k bich banni h dependency mtlb enrolled full time check rhega toh mon to fry tk ka dikhega
+			or nhi rhega toh saturday sunday hi dikhega bs)
+
+		kisi field ko apn 3 > trike se required or read only bna skte h (time of creation , Page Layout , Validation Rule)
+
+
+
+Schema builder>>>
+		Yaha  m mere object ko schecma ki form m rkh skta hu or yaha obejct field vgre bhi bna skta hu ,
+		pr yaha se jo m field bnauga vo muje ui pr nhi dikehgi ye show krvane k lie page layout pr jauga drag drog kruga fir dikhegai
+
+Formula fields>>
+		ye apne aap calculate hoti h like meine bta dia meri birth date ye h toh ye total age nikal degi ,,,,,toh isme kya hota h field insert kr skte h 
+		or unpr operator lga skte h or function lga kr calculation perform kr vaskte h ye bs read only field hoti h inhe edit nhi kr skte apn
+
+		Example>>
+ 			1> Calculate bonus if salary > 10 k then 20% else 10%
+			2> Calculate total salary of instructor
+
+		Creation dekh lete h iski >>>
+			apn field bnayege vha formula select krege or vha apn label name dege .....or niche hoga return type ki formula field k ye return type ho skte h 
+			8 return type hote h formula field k (percentage , number , currency , Text , CheckBox , Time , Date , Date/time)
+		
+			Ab apn advanced formula select krte h simple krne se kya hota h function vgre wala nhi dikhta normal formula likhne ki lie use krte h advance wala apn 
+			jada use krte h 
+
+			Treat blan field as Zero>>>
+				Jab tu calculation kar raha ho aur tu nahi chahta ki khali field ki wajah se poora formula hi kharab (blank/error) ho jaye.
+
+				Example: Maan le tera formula hai: Salary + Bonus.
+
+				Agar kisi employee ka Bonus khali (blank) hai, aur tune "Treat blank fields as zeroes" select kiya hai, toh Salesforce usko Salary + 0 maan lega aur 					chupchaap sahi answer de dega. Agar zero na maanta, toh calculation hi ruk jati ya error aa jati.
+
+			Treat blank fields as blanks (Khali field ko khali hi rehne do)>>>>
+
+			Example: Maan le tu discount calculate kar raha hai: Price * Discount_Percentage.
+
+			Agar kisi product par discount ki field hi khali hai, aur tune "Treat blank fields as blanks" select kiya hai, toh result bhi blank aayega. Soch agar yahan zero 			maan leta, toh poora discount hi 0 ho jata, jabki asliyat mein discount wahan apply hi nahi hua tha!
+
+			Yaha bohot se function h unke bare m pdhege aaram se
+
+
+		un dono  example k ans>>>.
+			1> if(Salary__c > 10000 , (Salary__c * 20/100) , (Salary__c * 20/100))
+			2> bonus + salary
+
+Validation Rule >>
+	Jab bhi koi user Salesforce mein koi naya record banata hai ya purana record edit karke Save button dabata hai, 
+	toh Validation Rule beech mein aa jata hai aur check karta hai ki user ne data sahi bhara hai ya nahi.
+
+	>ye Boolean type hi return krta h 
+	Bahut important point (Interview question): Validation rule tabhi trigger hota hai jab formula ki condition TRUE ho jati hai! Matlab agar condition true hui, toh error aayegi.
+
+
+
+
+	Muje 3 Validation rule Lgane h >>>
+
+		first >>
+			Student age should be greater then 0
+				Student__c <= 0 (humesha true pr error message dikha fir error msg m jake likh dena)
+
+			instructor rating should be between 1 to 5
+				Rating__c < 1 || Rating__c > 5
+
+			Student entrance score should no be blank
+				isBlank(Entrance_Score)
+
+
+
+All Function>>>
+
+  ABS >>
+		ABS(number) -> if we give any number then it convert into positive , how did we use it in validation rule
+				Example >>
+					Suppose i have discount and maxDiscount if decrement of them is greater then 500 then show error
+						ABS(discount__c - maxDiscount__c) > 500 (then write there error message)
+
+		ACOS (Arc Cosine) Function
+				Kaam kya karta hai: Yeh kisi bhi number ka arc cosine (inverse cosine) nikalta hai, aur output hamesha 					radians mein deta hai. iski value -1 se 1 k bich m hi hoti h 
+				Example>>
+					iska use salesforce m h advanced mathematical, geometrical, ya coordinate-based calculations ke liye kiya jata hai. Agar aap chahte hain ki user kisi field mein aisi value na daal sake jo trigonometry ke rule ke khilaaf ho (jaise -1 aur 1 ke beech ki limit cross karna),  
+				genrally toh hum ye krte h OR(
+    Trig_Input__c < -1,
+    Trig_Input__c > 1
+)
+
+		
+   		3>>ADDMONTHS(date , month) >
+				eh kisi bhi date mein diye gaye months (mahine) ko jodta (add) ya ghataata (subtract) hai aur ek nayi date return karta hai.
+				ADDMONTHS(DATE(2026, 1, 15), 3) ka result 15 April 2026 aayega.
+
+				ADDMONTHS(CloseDate, -2) Current date se 2 mahine peechhe ki date nikal kar dega.
+		4>>AND
+		AND Function
+			Kaam kya karta hai: Yeh check karta hai ki di gayi sari conditions (conditions/expressions) true hain ya 			nahi.
+
+			Agar sari conditions sahi (true) hain, toh AND ka result True aayega.
+
+			Agar ek bhi condition galat (false) ho gayi, toh pura result False ho jayega.
+
+			Syntax:
+
+			Plaintext
+			AND(condition1, condition2, condition3, ...)
+
+			AND(
+ 			   ISPICKVAL(StageName, "Closed Won"),
+    			   ISBLANK(Amount)
+			)
+	
+		
+		5>> ASCII(text) toh ascii value dega
+
+			Yeh sirf string ke pehle character ko hi dekhta hai, baaki poori string ko ignore kar deta hai. Agar aap 			blank string ("") pass karenge, toh yeh error de sakta hai ya blank return karega.
+
+		6>>ASIN (Arc Sine) Function
+			
+			Yeh kisi bhi number ka arcsine (inverse sine) nikalta hai, aur iska output hamesha radians mein aata hai.
+			iski range (-1 to 1 ) Asine ki jeise hi
+		7>>BEGINS
+			eh check karta hai ki koi text string kisi specific characters ya prefix se shuru hoti hai ya nahi. Agar text 			ussi word ya characters se start hota hai, toh yeh True return karta hai, warna False.
+
+			BEGINS(text, compare_text)
+			NOT(BEGINS(Employee_Code__c, "EMP-"))
+
+
+		8>>
+			BLANKVALUE(Middle_Name__c, "N/A")
+
+			Agar Middle Name bhara hua hai (jaise "Kumar"), toh yeh "Kumar" hi return karega.
+
+			Agar Middle Name khali hai, toh yeh substitute value "N/A" return karega.
+			BLANKVALUE(Discount__c, 0) > 50  
+
+			agr discount ki value balnk nhi h toh discount return hoga vrna 0 fir aage check krega 50 se
+
+		9>> BR
+			Agar aap chahte hain ki ek hi field mein First Name aur Last Name alag-alag line mein aayein:
+
+			Plaintext
+				First_Name__c & BR() & Last_Name__c
+				Result:
+					Rahul
+					Sharma
+		10> CASE
+			Salesforce formula fields aur validation rules mein CASE ek behad powerful aur aasan function hai. Agar aapko 			ek hi field ke liye multiple IF-ELSE conditions lagani padti hain, toh CASE usko bahut asan aur clean bana 			deta hai. Chaliye isko samajhte hain:
+
+			Plaintext
+				CASE(expression, value1, result1, value2, result2, ..., else_result)
+				expression: Wo field ya value jisko aap check karna chahte hain.
+
+				value1, result1: Agar expression value1 ke barabar hai, toh result1 return hoga.
+
+				else_result: Agar upar ki koi bhi value match nahi hoti, toh aakhri mein yeh default result return 				karega.
+			CASE(Rating, 
+ 				   "Hot", "High Priority Account", 
+    				   "Warm", "Medium Priority Account", 
+    				   "Cold", "Low Priority Account", 
+    				   "General Account"
+  			)
+
+		11>CASESAFEID
+				Converts a 15-character ID into a case insensitive 18-character ID  
+		12>CEILING
+			CEILING(4.2) ka result 5 aayega.
+		13>CHR(number)
+ 				ye number ko convert krta h symbol m like 65 ka A
+
+		14>CONTAINS(text, compare_text) return either true or false
+				Yeh case-sensitive hota hai (matlab capital aur small letters ka dhyan rakhna padta hai, jaise "Test" 				aur "test" alag maane jayenge).
+
+				Agar compare_text khali ("") hai, toh CONTAINS hamesha True return karega.
+		15>COS(number)
+				Returns the cosine of the number, where the number given in radians
+		16>CURRENCYRATE
+			Kaam kya karta hai: Yeh kisi bhi specific ISO currency code (jaise "USD", "EUR", "INR", "GBP") ka current 			exchange rate return karta hai, kiske mukable? Corporate Currency ke mukable (jo aapke Salesforce org ki main 			currency hoti hai).
+
+Page LayOut>>>
+		Page Layout kya hota hai? (Simple Definition)
+		Page Layout ek "Design ya Naksha" (Blueprint) ki tarah hai. Jab tu Salesforce mein kisi object ka koi record (jaise Position record) kholta hai, 
+		toh screen par jo fields, buttons, related lists aur sections dikhte hain—wo sab Page Layout hi tay karta hai.
+
+		Isko tu apne ghar ke interior design ya mobile ke home screen jaisa samajh sakta hai:
+
+		Koyi app kahan dikhegi?
+
+		Kaunsa button kahan hoga?
+
+		Kaunsi field upar dikhegi aur kaunsi niche?
+		Yeh sab kuch Page Layout hi set karta hai.
+
+
+Page Layout ke andar kya-kya hota hai? (Main Features)
+	Jab tu apna Position Layout edit karega, toh wahan tujhe ye sab cheezein milengi:
+
+	Fields (Fields ko Drag & Drop karna):
+
+		Jo fields tune banayi hain (jaise Job Description, Min Pay, Max Pay, Status), unhe layout mein kahan rakhna hai—upar, niche, left side ya right side—yeh sab tu drag and 		drop karke set kar sakta hai.
+
+	Sections: 
+		Tu alag-alag heading (sections) bhi bana sakta hai jaise "Basic Information", "Salary Details", "Additional Info" taaki form saaf-suthra dikhe.
+
+	Buttons (Standard aur Custom Buttons):
+
+		Upar jo buttons hote hain jaise Edit, Delete, Clone, Share, unhe rakhna hai ya hatana hai, yeh bhi layout se control hota hai.
+
+	Related Lists (Dusre objects ka data):
+
+		Maan le Position ke andar yeh dekhna hai ki is position ke liye kaun-kaun se candidates ne apply kiya hai, toh jo Candidate ki list niche dikhti hai, usko Related List 		kehte hain. Yeh bhi Page Layout ke andar hi set hoti hai.
+
+	Field Properties (Required ya Read-Only banana):
+
+		Page Layout se tu kisi field ko Required (ki isko bhare bina form save hi na ho) ya Read-Only (ki user sirf dekh sake, badal na sake) bhi bana sakta hai.
+
+
+"New" button dabane par kya hota hai?(jb tuje or page layout banne ho tb)
+		Jab tu New par click karega, toh Salesforce tujhse do main cheezein poochega:
+
+		Existing Layout ko Copy (Clone) karna hai kya?
+			Salesforce tujhe ek option deta hai ki tu purane wale layout (jaise tere Position Layout) ko hi copy karke ek naya layout bana le. Isse teri mehnat bach jaati hai, 			baar-baar saari fields drag nahi karni padti. Bas jo thode-bohot badlaav karne hon, wo karke save kar leta hai.
+
+		Naye Layout ka Naam: Tu apne naye layout ka koi bhi naam rakh sakta hai (jaise Position HR Layout, Position Interviewer Layout, etc.).
+
+		Ek Object ke liye multiple Page Layouts banane ka fayda kya hai?
+		Jaise maine pichhle message mein bataya tha, alag-alag logo (Profiles) ke liye tu alag layout set kar sakta hai:
+
+		Example:
+
+		Maan le ek layout hai "Position - Standard Layout" jo normal employees ko dikhega. Isme kuch sensitive fields (jaise Salary ya Budget) chhupi hongi.
+
+		Aur ek naya layout tune bana diya "Position - HR Manager Layout", jisme tu Salary aur saari confidential fields visible rakh raha hai.
+		
+{{{{{
+1. BUTTONS (Standard & Custom Buttons)
+Kahan hote hain: Yeh page ke sabse upar (header mein) dikhte hain (jaise Edit, Delete, Clone).
+
+Kuch select kyu nahi ho rahe / Hide kyu hain?
+
+Jo buttons pehle se layout ke upar main action bar mein fit ho chuke hote hain, wo palette se hide (grey) ho jate hain taaki tu unhe dubara na utha sake.
+
+Kuch custom buttons ya standard buttons tab tak disable rehte hain jab tak unki permission ya system feature on na ho.
+
+Tujhe jo 2 dikh rahe hain (Send Survey, Submit for Approval):
+
+Send Survey: Is par click karke user ko email par feedback/survey bheja ja sakta hai.
+
+Submit for Approval: Is par click karke record ko approval process (jaise manager ki permission ke liye) bheja jata hai.
+
+2. QUICK ACTIONS & MOBILE AND LIGHTNING ACTIONS
+Yeh kya hain: Yeh naye zamaane ke shortcut buttons hain jo Salesforce Lightning aur Mobile App mein sabse upar ya floating action bar mein dikhte hain. Inse user bina poora page khole quick kaam kar sakta hai.
+
+Main Actions ke Kaam:
+
+Email: Bina email kholen, yahin se seedha is record par email bhejne ka popup khul jata hai.
+
+Log a Call: Agar customer se phone par baat hui, toh uska note/call record yahin quick entry karke save karne ke liye.
+
+New Task / New Event: Is record ke andar hi koi naya task (reminder) ya meeting calendar event banane ke liye.
+
+3. EXPANDED LOOKUPS
+Yeh kya hai: Jab tu kisi record par hover karta hai ya mobile app mein dekhta hai, toh jo parent fields (jaise Owner ka naam, Account ka naam) ek chote se pop-up box mein dikhti hain, unko control karne ke liye yeh hota hai. Mobile view ke liye yeh zyada important hota hai.
+
+4. RELATED LISTS (Ek-Ek Jankari Notes Style)
+Related Lists ka matlab hota hai—"Isi main record se jude hue doosre records ki list jo niche table ki form mein dikhti hai."
+
+Tere layout mein jo main related lists milti hain, unke kaam yeh hain:
+
+Approval History: Is record par ab tak kaun-kaun se approvals liye gaye hain, unka poora itihas (History) dikhata hai ki kisne approve ya reject kiya.
+
+Files: Is Position se judi hui koi bhi PDF, Image, ya document file agar upload ki gayi hai, toh wo yahan dikhegi aur yahin se nayi file add bhi ho sakti hai.
+
+Open Activities: Aane wale future ke tasks, meetings ya calls jo is record ke liye schedule ki gayi hain (jo abhi tak poori nahi hui).
+
+Activity History: Jo tasks ya calls is record par pehle complete kiye ja chuke hain, unka purana record (History).
+}}}}
+
+//
+
+
+
+Chapter >>>> RelationShip
+
+
+Student has some fields and Instructor has some Fields by ut we relate both object (one to many and so on or many side hi foreign key bnti h veise hi vaha bhi vhi bnegi)
+
+
+For Standard Object>>
+		in Standard object opening sales application then there has Account and Contact  , When i click on particular record then i se details where are account has
+		many contact kyuki Account m related feild m Many wale dikhege vo related h Object h iske 
+
+		Mtlb>> Account m khali related field hogi(contact , oppeortunities)..... or many side contact bnauga tb Account ki infor deni hogi 
+
+LookUp fields>>>
+
+	1> By this i connect one object to another
+	2>Lookup relation loosely coupled hoti hai. Iska matlab yeh hai ki agar aap parent record ko delete karte hain, toh child record delete nahi hota, balki child record ke andar jo 		parent ka reference (field value) hota hai, woh sirf blank (null) ho jata hai. 	
+		
+		pr agr meine parent m se field delete krdi jo ki depenedent thi child pr like refrence wali toh contact m jitne record m thi vo delete ho jayega connection tut gya toh
+		vo ui pr nhi dikehga 
+
+	3>Agr muje dekhna h ye field lookup h ya nhi toh obejct manager m , cutom field m dikh jayegi  like Contact m dikhegi
+
+		Like Account(one) to Contact(Many) toh contact side meri lookup field bnegi or vha hi object mnahager m dikehga	
+
+	4>Ye apn Standard Object pr bhi bna skte h 
+
+Example - 5 krna jisme muje Class naam k Object bnana h .....Create Course duration and fees (Currency)
+
+		->Sbse phle class ka object or uski fields bnali apn ne
+		->Student m sari fields bnali thi apn ne pr ek nhi bnai thi lookup wali
+
+>>Creating a lookup field on Student related to Class (one class has many Student so in Student there has lookup field and in Class there has related list)
+		    class(one)(Parent)-----> Student (child)(many)
+		    creating a field in Student class ----> lookup field ---> aao iskke creation bhi dekhe ----> yaha kya hoga suppose meine field bnadi Student m toh icon dikhega jis se m
+		   data insert kr skta hu 
+
+		  ab next pr aayega related to Parent ka naam do like (Class) , Child Relationship Name (yaha mera Students ka naam aajayega) 
+
+		1. What to do if the lookup record is deleted? (Lookup Delete Options)
+			Jab aap parent record (jaise Account) ko delete karte hain, toh child record (jaise Contact) ke sath kya hona chahiye—ye teen options uske liye hote hain:
+
+		Clear the value of this field (Loosely Coupled):
+
+			Matlab: Agar aap parent record ko delete karenge, toh child record delete nahi hoga, balki child record ke andar jo parent ka reference tha, woh sirf blank (null) 			ho jayega. (Jiski baat humne abhi thodi der pehle ki thi).
+
+		Delete this record also (Cascade Delete):
+
+			Matlab: Agar aapne yeh option chun liya, toh jaise hi aap parent record (Account) ko delete karenge, usse jude hue saare child records (Contacts) bhi automatic 			delete ho jayenge.
+
+		Don't allow deletion of the lookup record:
+
+			Matlab: Salesforce parent record ko delete hi nahi karne dega jab tak uske sath koi child record juda hua hai. Pehle aapko child record ko hatana ya kisi aur parent 			se jodna padega, tabhi parent delete hoga.
+
+		last step m mera Realted Label aayega >> mtlb child wali class ka naam jo mere parent pr dikhega smje 
+
+	Ab m Class m khcuh record bna duga uske relate wale section m Student dikega or ,,,,next ye ki Student ke record bnauga toh unme class bhi de skta hu or phle se student k bne h 
+	toh link krduga icon se 
+		
+(Student do class m bhi toh ho skta h like many to many relationship ye last m dekehege )
+
+Master-Details relationship>>>(one to many)
+	Tight coupled 
+		Matlab: Jab aap yeh relation banate hain, toh child (detail) record ko save karne ke liye parent (master) ka select hona 100% zaroori (mandatory) hota hai. Aap bina parent 		ke child record ko akela save nahi kar sakte.
+
+
+
+	Ownership aur Sharing" ka Example (Child record ko update kaise karein?)
+		Maante hain ki aapke paas ek Account (Master) hai jiska naam "ABC Tech" hai aur iska owner "Rahul" hai.
+		Ab is Account ke andar ek Contact (Detail) hai jiska naam "Amit" hai.
+
+		Owner kaun hai? Kyunki yeh Master-Detail relation hai, isliye Amit (Child) ka owner bhi automatic Rahul hi ban jayega. Amit ka apna alag owner nahi ho sakta.
+
+		Update kaise karenge?
+
+		Agar Rahul (jo owner hai) chahe, toh woh us Contact (Amit) ko aasani se open karke update (edit) kar sakta hai.
+
+		Lekin agar koi aisa user hai jiske paas parent "ABC Tech" ko dekhne ya edit karne ki permission nahi hai, toh woh uske child "Amit" ko bhi edit nahi kar payega. Matlab 		child ko update karne ke liye parent ki security permissions hi sab kuch decide karti hain.
+		>>Creating a lookup field on instructor related to Class (one class has many Instructor so in instructor there has lookup field and in Class there has related list)
+		ye bhi upr wale trike jeise krege
+
+	3. "When a user deletes the master record, all detail records are deleted"
+		Matlab: Yeh Lookup se sabse bada fark hai! Lookup mein parent delete hone par child safe rehta hai aur uska field blank ho jata hai. Lekin Master-Detail mein agar aapne 		Master (Parent) record delete kiya, toh uske saare Detail (Child) records automatically delete ho jayenge (Cascade Delete).
+
+	4. Matlab: Iski madad se Parent object par ek special field banti hai jo child records ka data ginti ya jod sakti hai.(Roll up Summery)
+
+Aap child object par bani Master-Detail field ko seedhe (directly) delete nahi kar sakte. Salesforce is par restriction lagata hai kyunki detail records ke liye parent hona mandatory hota hai.
+Pehle Lookup mein Convert karna hoga: Field ko delete karne ke liye pehle aapko relationship ko Master-Detail se Lookup Relationship mein convert karna hoga.
+
+Multi-Select Creation
+{{{
+
+>>>>>>>>>>>>Allow reparenting 
+	Ki meine student pr ek baar classA assign krdi toh change nhi kr skta agr check kia toh 
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>Sharing setting
+
+Farak yeh hai ki User ka Parent record par kya hak (access) hai! Isko aise samjho:
+
+Scenario A: Sharing Setting = "Read Only"
+
+Rule: User ke paas Parent record par sirf Read access hona chahiye.
+
+Matlab: Maan lijiye ek Manager hai jiske paas ek Project (Parent) ko sirf dekhne (Read) ki permission hai, woh usme koi badlaav nahi kar sakta. Lekin agar woh chahe toh us project ke andar naye Tasks (Child) create kar sakta hai, edit kar sakta hai, ya delete kar sakta hai.
+
+Yani Parent sirf padhne ke liye hai, par child par poora control mil gaya.
+
+Scenario B: Sharing Setting = "Read/Write"
+
+Rule: User ke paas Parent record par Read aur Write (Modify) dono access hone zaroori hain.
+
+Matlab: Agar us Manager ke paas Project (Parent) ko Edit karne ka access nahi hai, toh Salesforce usko us project ke andar koi naya Task (Child) create ya edit karne nahi dega. Child par kaam karne ke liye pehle parent par Write access hona zaroori hai.
+
+
+last m child pr bna rha hu like Student pr toh >> related list m Student nam aayega or nich page layout ka naam aayega ki kis PArent k page layout m ye related list dikehgi 
+
+}}}
+
+
+yaha m parent side m roll up summary bna skta hu taki m child k fields se calculation perform krva sku 
+
+
+
+
+>>Converting Look-up field Created on Student obj into master-detaild feilds
+
+	Lookupk ko muje  master m convert krna h toh yhi way h ki ya toh koi records nhi ho tb bnao ya fir ,,,,,phle se record h toh use lookup bnao fir uske sare child object m reference h parent ka unhe fill kro fir ...object manager m jake field or fir datatype change kro multi m ho jayega	
+
+
+Roll up summary Fields>>>
+
+		Read only fields h ye parent side hi hogi humesha .....class pr jake nyi field bnalo fir count , max , min , avg , total niakl skte h count k alawa sb 
+		k lie field select krni hogi 
+		[]all record include krne h calculation m 
+		[]ya selected ye apne pr h 
+
+>>Ek object m do master fields bna skte h or lookup kitni  bhi 
+>> we cant creare master detail on standard object
+>>Create Avg(Enteace) mark in class side
+>> jo instructor pr lookup bna h use master m convert krna h , then total instructor roll up summary bnani h 
+>> ab instructor ki master ko waps lookup m convert krdo 
+	ye kr skte h pr bs hume roll up summary ko delte krna hoga recyle bin se bhi thbi 
+
+Junction object>>>
+   Create an StdClass Obejct wehre we create two master detail field first for student(parent) and second for class()parent
+>>lookup summary limit(40) and master 2	
+	

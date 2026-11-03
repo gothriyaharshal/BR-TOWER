@@ -1,0 +1,87 @@
+/*
+Author -> Harshal Gothriya
+Date -> 20/10/2026
+*/
+
+class NumberUtility {
+
+	public static boolean isPrime(int number) {
+		
+		if(number <= 1) {
+			System.out.println("Number is equal or less then 1");
+			return false;
+		}
+
+		for(int i = 2 ; i < number ; i++) {
+			if(number % i == 0)
+				return false;
+			else {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	
+	public static boolean isPalimdrome(int number) {
+		//number reverse is equal to same number is known as palimdrom number
+
+		int temp = number ;
+		int reverse = 0;
+
+		while(number > 0) {
+			int remainder = number % 10;
+			reverse = reverse * 10 + remainder;
+			number = number/10;	
+		}
+
+		if(number == temp)
+			return true;
+		else 
+			return false;
+	}
+
+
+	public static boolean isArmstrong(int number) {
+
+		int count = numberofElement(number);
+		int powerSum = powerOfElementAddition(number , count);
+
+		while(number > 0) {
+			int rem = number % 10;
+			sum = sum + rem ;
+			number = number/10;
+		}
+
+		if(number == powerSum) 
+			return true;
+		else
+			return false;
+	}
+	
+	public static int count(int number) {
+		int count = 0;
+
+		while(number > 0) {
+			number = number % 10;
+			count++;
+		}
+	}
+
+	public static int powerSum(int number , int power) {
+		int p = 1;
+		while(power > 0) {
+			p = p * number;
+			power--;
+		}
+		return p;
+	}
+
+}
+
+
+
+
+
+
+

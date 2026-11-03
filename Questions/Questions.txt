@@ -1,0 +1,11 @@
+1 > if we deleted obejct then where it goes and in recyle bin(time limit)
+2 > if we  delete Picklist then it affect on previous record or not 
+3 > if we globally set the picklist then we add new data in it or not in field we are creating
+4 > which data type convert into which one
+5 > Autonumber limit
+6 > Page Layout [Detail page and Edit page]
+7 > Compact layout
+8 > Licence 
+9 > in deployed and in Devlopment
+8 > in search layout i search from record name but frome other fields also i want to search then how 
+9 > Formula field m jo function h unke bare m dekh lena ek baar
