@@ -792,5 +792,76 @@ Roll up summary Fields>>>
 
 Junction object>>>
    Create an StdClass Obejct wehre we create two master detail field first for student(parent) and second for class()parent
+like StdClass m mera hoga dono thik h 
 >>lookup summary limit(40) and master 2	
+
+
+Scenerios(Lookup)>>
+		(Record)
+	1> in look up if i delete parent record then child record refrece set to be null 
+		but if we check required while creating lookup field then parent we cant delete we have to delete first child one
+	2>look up field delete kr skta hu m ye krne se child k data pr frk nhi pdega ,,,,relationship break hui ab jayega vo recycle bin m waps aayega toh bhi relation
+		break hui hogi or sbme null set ho jayega
+
+		pr agr m parent object ko hi delte krna chahu toh {
+		एरर संदेश: यह कहेगा कि इस Object को डिलीट नहीं किया जा सकता क्योंकि इसका रिलेशनशिप (Dependency) Child Object के साथ बना हुआ है।
+		}
+		
+		m child object ko delete krdu toh kr skta hu pr child object m jo lookup field hogi vo delete krdu toh ......relationship tut jayega or jitney record the 		vo surkcit hoge bs ui pr nhi dikhege
 	
+
+Scenerios(Master Detail)>>
+
+
+1. अगर आप Parent (Master) Record को डिलीट करते हैं तो क्या होगा?
+
+• Cascade Delete (सब साफ): यह Master-Detail का सबसे बड़ा नियम है। अगर आप एक Parent रिकॉर्ड डिलीट करेंगे, तो उससे जुड़े सारे Child (Detail) रिकॉर्ड्स अपने आप डिलीट हो जाएंगे।
+• Recycle Bin नियम: अगर आप Parent रिकॉर्ड को Recycle Bin से रिस्टोर (Undelete) करते हैं, तो उसके सारे Child रिकॉर्ड्स भी अपने आप वापस आ जाएंगे। relationship maintain hoga
+. pr child object ko phle recyle bin se bahar nhi la skta m phle parent ko lana hoga child wale recycle bin m nhi dikhge veise
+
+
+2> agr m child record ko delete krta hu toh ho jayega easyli or Roll up summary hogi us record se toh vo update ho jayegi automatic
+
+3> agr m Parent ki normal field ko delete krta hu toh khuch nhi frk pdega,,,
+   pr m vo field delet ekrta hu jo child m refrence ka kaam kr rhi h toh vha m nhi kr skta error aayega ki bhai relationship h  , delete krne ka trika yhi h lookup m bdlo ordependecy htao
+
+4> master field delete ki toh ho jayegi pr us pr koi roll up summary nhi honi chahiye us se related sare child k record bhi delete ho jayege relationship break ho 
+	jayegi or waps restore kru toh relation ship data aajayega pr vo convert hogi lookup m 
+(agr koi record nhi h child m fir meine delete kia master field tb bhi ho jayegi or waps kruga toh lookup m relationship break hogi waps aajayegi )
+
+5>child object pura delete kr skta hu m 
+
+(system fields owener , createdBy , lastModified by ye sb lookup field h or owener ka obejct h user group or baki do ka user)
+
+
+Junction object(Scenerio)
+
+junction m mere do master detail bnegi ek detail krdi toh relton ship break vo jayegi recycle beein m waps restore kruga toh master lookup ho jayegu or data waps aajayega
+
+
+>>meine position or Employement website k bich junction object bnana h meine kya kia nya object bnaaya dono m master field rkhi ab m ,,,
+>>Employement website k page layout pr jake related section m related list k wrech icon m positon ka select kr luga or position m emplyoment ka 
+
+3. अगर आप Junction Object में से किसी एक Master-Detail FIELD को डिलीट करते हैं:
+
+• रिलेशनशिप का प्रकार बदल जाएगा: चूंकि Junction Object दो Master-Detail फ़ील्ड्स से मिलकर बनता है, अगर आप उनमें से एक Master-Detail फ़ील्ड को डिलीट कर देते हैं, तो वह ऑब्जेक्ट अब Junction Object नहीं रहेगा।
+• One-to-Many (1:M) में बदलाव: अब वह ऑब्जेक्ट सिर्फ एक ही Parent से जुड़ा रहेगा और एक सामान्य Child Object की तरह व्यवहार करने लगेगा। डिलीट की गई फ़ील्ड का सारा डेटा हमेशा के लिए साफ हो जाएगा।
+
+
+4. अगर आप पूरा Junction Object ही डिलीट कर देते हैं:
+
+• सारे लिंक्स और डेटा खत्म: Junction Object, उसके सारे रिकॉर्ड्स, पेज लेआउट्स और दोनों Master-Detail फ़ील्ड्स डिलीट हो जाएंगे और Recycle Bin (Deleted Objects) में चले जाएंगे।
+• दोनों Parents सुरक्षित: Parent A और Parent B को कोई नुकसान नहीं होगा, लेकिन उनके बीच का Many-to-Many पुल (Bridge) पूरी तरह टूट जाएगा।
+
+
+5. अगर आप पूरे Parent Object (A या B) को डिलीट करना चाहें:
+
+• Salesforce सीधे डिलीट नहीं करने देगा (Blocked): चूंकि Junction Object इन दोनों Parents पर निर्भर है, इसलिए Salesforce आपको किसी भी Parent Object को सीधे डिलीट करने से रोक देगा।
+• डिलीट करने का तरीका: पहले आपको Junction Object पर जाकर उस विशेष Parent से जुड़ी Master-Detail Relationship Field को डिलीट करना होगा, उसके बाद ही आप मुख्य Parent Object को डिलीट कर पाएंगे।
+
+
+   
+6>
+1. Primary vs Secondary Parent: Junction Object पर जो Master-Detail फ़ील्ड सबसे पहले बनाई जाती है, वह Primary Parent कहलाती है। जो दूसरी बार बनाई जाती है, वह Secondary Parent होती है।
+2. Look & Feel (Look and Feel Inherit): Junction Object के रिकॉर्ड का बैकग्राउंड कलर, ओनर (Owner) और लुक हमेशा Primary Parent के जैसा ही तय होता है।
+3. Roll-up Summary: आप दोनों Parents (A और B) के ऊपर Roll-up Summary Fields बना सकते हैं ताकि यह गिना (Count/Sum) जा सके कि एक Parent से कितने Junction रिकॉर्ड्स जुड़े हुए हैं।
