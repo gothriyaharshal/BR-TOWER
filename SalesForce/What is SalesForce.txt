@@ -836,6 +836,17 @@ Scenerios(Master Detail)>>
 
 Junction object(Scenerio)
 
+
+junction object m meri do master detail field bnegi 
+primary field
+>>>>>ye vo bnegi jo sbse phle masterdetail bnegi mere junction object m 
+>>>>>isko delete krdia meine toh secondary field pr ko asr nhi pdega m delete kr skta hu easyli or recycle been se waps laya toh ye lookup m convert hogi kyuki or koi record bhi toh add ho 		skta h iske delete hone k badd
+>>>>>junction object ka koi particularr owner nhi hota ye apn owd sharing setting se decide krte h 
+
+secondary field
+>>isme jo second number pr bengi vo meri secodnary hogi or m .....isko delete krsta hu bilkul primary jeise hi 
+
+
 junction m mere do master detail bnegi ek detail krdi toh relton ship break vo jayegi recycle beein m waps restore kruga toh master lookup ho jayegu or data waps aajayega
 
 
@@ -865,3 +876,9 @@ junction m mere do master detail bnegi ek detail krdi toh relton ship break vo j
 1. Primary vs Secondary Parent: Junction Object पर जो Master-Detail फ़ील्ड सबसे पहले बनाई जाती है, वह Primary Parent कहलाती है। जो दूसरी बार बनाई जाती है, वह Secondary Parent होती है।
 2. Look & Feel (Look and Feel Inherit): Junction Object के रिकॉर्ड का बैकग्राउंड कलर, ओनर (Owner) और लुक हमेशा Primary Parent के जैसा ही तय होता है।
 3. Roll-up Summary: आप दोनों Parents (A और B) के ऊपर Roll-up Summary Fields बना सकते हैं ताकि यह गिना (Count/Sum) जा सके कि एक Parent से कितने Junction रिकॉर्ड्स जुड़े हुए हैं।
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<,
+
+
